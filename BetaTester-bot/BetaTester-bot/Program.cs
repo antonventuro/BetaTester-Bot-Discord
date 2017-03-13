@@ -10,6 +10,7 @@ namespace BetaTester_bot
     {
         static void Main(string[] args)
         {
+            BetaTesterBot bot = new BetaTesterBot();
         }
     }
 }
