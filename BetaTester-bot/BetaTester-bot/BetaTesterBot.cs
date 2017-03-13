@@ -15,7 +15,7 @@ namespace BetaTester_bot
 
         DiscordClient discord;
         CommandService comando;
-       
+
 
         public BetaTesterBot()
         {
@@ -27,10 +27,12 @@ namespace BetaTester_bot
             comando = discord.GetService<CommandService>();
 
             //--------------------------------------------
+            //  comandoEliminar();
             ComandoHola();
             comandoinfo();
+
             MensajeComParametro();
-           
+            RegisterPurgeCommand();
 
             //--------------------------------------------
             Bienvenida();
@@ -96,13 +98,14 @@ namespace BetaTester_bot
             });
         }
 
+       
         private void Bienvenida()
         {
             discord.UserJoined += async (s, e) =>
             {
                 var canal = e.Server.FindChannels("general", ChannelType.Text).FirstOrDefault();
                 var user = e.User;
-                await canal.SendMessage(String.Format("{0} se ha unido al servidor", user.Mention));
+                await canal.SendMessage(String.Format(":inbox_tray: {0}, se ha unido a **GameDevs** :smile: :wave: ", user.Mention));
             };
         }
 
@@ -112,7 +115,7 @@ namespace BetaTester_bot
             {
                 var canal = e.Server.FindChannels("general", ChannelType.Text).FirstOrDefault();
                 var user = e.User;
-                await canal.SendMessage(String.Format("{0} ha salido del servidor", user.Mention));
+                await canal.SendMessage(String.Format(":outbox_tray: {0}, se ha ido de **GameDevs** :slight_frown: :wave:", user.Mention));
             };
         }
         private void MensajeComParametro()
@@ -157,6 +160,8 @@ namespace BetaTester_bot
 
             return result;
         }
+
+        
 
         //-------------------------------------------------------
 
