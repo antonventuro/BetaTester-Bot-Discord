@@ -82,7 +82,7 @@ namespace BetaTester_bot
             {
                 var user = e.User;
 
-                await e.Channel.SendMessage(String.Format("Hola! {0} Como estas, espero que bien :slight_smile::v:", user.Mention));
+                await e.Channel.SendMessage(String.Format("Hola! {0} ¿Cómo estás?, Espero que bien. :slight_smile::v:", user.Mention));
             });
         }
 
@@ -92,7 +92,7 @@ namespace BetaTester_bot
             {
                 var user = e.User;
 
-                await e.Channel.SendMessage(String.Format("Lo sentimos por ahora no hay info del server!"));
+                await e.Channel.SendMessage(String.Format("Lo sentimos, por ahora no hay información del servidor"));
             });
         }
 
