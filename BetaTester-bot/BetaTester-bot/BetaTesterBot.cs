@@ -80,7 +80,7 @@ namespace BetaTester_bot
 
         private void ComandoHola()
         {
-            comando.CreateCommand("Holas").Do(async (e) =>
+            comando.CreateCommand("Hola").Do(async (e) =>
             {
                 var user = e.User;
 
