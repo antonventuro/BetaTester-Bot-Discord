@@ -29,8 +29,9 @@ namespace BetaTester_bot
             //--------------------------------------------
             //  comandoEliminar();
             ComandoHola();
-            comandoinfo();
-
+            //comandoinfo();
+            comandohelp();
+            comandoclear();
             MensajeComParametro();
             //RegisterPurgeCommand();
 
@@ -88,17 +89,84 @@ namespace BetaTester_bot
             });
         }
 
-        private void comandoinfo()
+        //private void comandoinfo()
+        //{
+        //    comando.CreateCommand("info").Do(async (e) =>
+        //    {
+        //        var user = e.User;
+
+        //        await e.Channel.SendMessage(String.Format("Lo sentimos, por ahora no hay información del servidor"));
+        //    });
+        //}
+
+        private void comandohelp()
         {
-            comando.CreateCommand("info").Do(async (e) =>
+            comando.CreateCommand("help").Do(async (e) =>
             {
                 var user = e.User;
+               
+                await e.Channel.SendMessage(String.Format("Ok, {0} Te enviare un mensaje privado", user.Mention));
 
-                await e.Channel.SendMessage(String.Format("Lo sentimos, por ahora no hay información del servidor"));
+                await e.User.SendMessage("[**LISTA DE COMANDOS**]"+ "\n\n" +
+                                         "```• hola  : Saludo del Bot " + "\n" +
+                                         "• help  : Informacion del bot" + "\n" +
+                                         "• nota  : Enviar una nota a travez del bot" + "\n"+
+                                         "• clear : Limpiar mensajes del canal" + "\n" +
+                                         "• bienvenida y despedida del usuario al server activados ```" + "\n\n" +
+                                         //"**Soporte Bot**" + "\n" +
+                                         //"Github: github.com/antonventuro/BetaTester-Bot-Discord" + "\n\n" +
+                                         "**Social**:" +"\n"+
+                                         "Trello: https://trello.com/b/j4dy8b9v/comunidad-gamedevs-hispanos" + "\n" +
+                                         "Twitter: -" + "\n" +
+                                         "Youtube: -" + "\n\n" +
+                                         "**Discord Oficial**" + "\n" +
+                                         "Comunidad dedicada a los desarrolladores hispanohablantes, únase al servidor: https://discord.gg/mazXpvp");
+
+
+
             });
         }
 
-       
+        private void comandoclear()
+        {
+            comando.CreateCommand("clear")
+            .Parameter("cantidad", ParameterType.Required)
+            .Do(async (e) =>
+            {
+
+                var userRoles = e.User.Roles;
+                if (userRoles.Any(input => (input.Name.ToUpper() == "ADMINS")))
+                {
+                    int cantidad = Int32.Parse(e.Args[0]);
+                    Message[] mensajeAeliminar;
+                    while (cantidad > 0)
+                    {
+                        if (cantidad < 500)
+                        {
+                            mensajeAeliminar = await e.Channel.DownloadMessages(cantidad);
+                            cantidad = 0;
+                        }
+                        else
+                        {
+                            mensajeAeliminar = await e.Channel.DownloadMessages(100);
+                            cantidad -= 500;
+                        }
+                        await e.Channel.DeleteMessages(mensajeAeliminar);
+                        await Task.Delay(5000);
+                    }
+                }
+                else
+                {
+                    
+                    await e.Channel.SendMessage("No tienes permiso para usar el comando `clear`");
+                   
+                }
+
+
+
+            });
+        }
+
         private void Bienvenida()
         {
             discord.UserJoined += async (s, e) =>
