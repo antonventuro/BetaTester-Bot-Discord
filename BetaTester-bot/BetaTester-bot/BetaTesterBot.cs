@@ -32,7 +32,7 @@ namespace BetaTester_bot
             comandoinfo();
 
             MensajeComParametro();
-            RegisterPurgeCommand();
+            //RegisterPurgeCommand();
 
             //--------------------------------------------
             Bienvenida();
@@ -47,7 +47,7 @@ namespace BetaTester_bot
             {
                 discord.ExecuteAndWait(async () =>
                 {
-                    await discord.Connect("MjkwODk5Nzc2Njg0NDI1MjE3.C6hpHw.NbAbt2v0m24HU79tFMffm0fmpCs", TokenType.Bot);
+                    await discord.Connect(Config.Token, TokenType.Bot);
                 });
             }
             catch
