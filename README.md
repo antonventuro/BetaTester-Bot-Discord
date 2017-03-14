@@ -1,6 +1,6 @@
 # BetaTester-Bot-Discord
 
-Para utilizar el Bot hay que configurar el token en Config.cs, estos cambios son ignorados por Git.
+Para utilizar el Bot hay que configurar el token en el Config.cs:
 
 ```csharp
 public const string Token = "YOUR_TOKEN";
