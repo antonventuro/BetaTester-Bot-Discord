@@ -27,15 +27,15 @@ namespace BetaTester_bot
             comando = discord.GetService<CommandService>();
 
             //--------------------------------------------
-            //  comandoEliminar();
+            
             ComandoHola();
             Comandoinfo();
             comandoayuda();
             ComandoAvatar();
             comandolimpiar();
-            //Comandoping();
+           
             MensajeComParametro();
-            //RegisterPurgeCommand();
+           
 
             //--------------------------------------------
             Bienvenida();
