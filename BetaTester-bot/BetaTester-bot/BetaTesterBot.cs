@@ -29,9 +29,11 @@ namespace BetaTester_bot
             //--------------------------------------------
             //  comandoEliminar();
             ComandoHola();
-            //comandoinfo();
-            comandohelp();
-            comandoclear();
+            Comandoinfo();
+            comandoayuda();
+            ComandoAvatar();
+            comandolimpiar();
+            //Comandoping();
             MensajeComParametro();
             //RegisterPurgeCommand();
 
@@ -88,31 +90,60 @@ namespace BetaTester_bot
                 await e.Channel.SendMessage(String.Format("Hola! {0} ¿Cómo estás?, Espero que bien. :slight_smile::v:", user.Mention));
             });
         }
+        private void ComandoAvatar()
+        {
+            comando.CreateCommand("avatar").Do(async (e) =>
+            {
+                var user = e.User;
 
-        //private void comandoinfo()
+                await e.Channel.SendMessage(String.Format(user.AvatarUrl));
+            });
+        }
+        private void Comandoinfo()
+        {
+            comando.CreateCommand("info").Do(async (e) =>
+            {
+              
+                var user = e.User;
+                
+                await e.Channel.SendMessage(String.Format("Nombre: **{0}**", user.Name));
+                await e.Channel.SendMessage(String.Format("Nick: **{0}**", user.Nickname));
+                await e.Channel.SendMessage(String.Format("ID: **{0}**", user.Id));
+                await e.Channel.SendMessage(String.Format("Se unio: **{0}**", user.JoinedAt));
+                await e.Channel.SendMessage(String.Format("Server: **{0}**", user.Server));
+               
+            });
+        }
+
+        //private void Comandoping()
         //{
-        //    comando.CreateCommand("info").Do(async (e) =>
+        //    var CServicio = discord.GetService<CommandService>();
+        //    CServicio.CreateCommand("ping").Do(async (e) =>
         //    {
-        //        var user = e.User;
 
-        //        await e.Channel.SendMessage(String.Format("Lo sentimos, por ahora no hay información del servidor"));
+        //        await e.Channel.SendMessage("Pong!");
+               
         //    });
         //}
-
-        private void comandohelp()
+        private void comandoayuda()
         {
-            comando.CreateCommand("help").Do(async (e) =>
+            comando.CreateCommand("ayuda").Do(async (e) =>
             {
                 var user = e.User;
                
                 await e.Channel.SendMessage(String.Format("Ok, {0} Te enviare un mensaje privado", user.Mention));
 
-                await e.User.SendMessage("[**LISTA DE COMANDOS**]"+ "\n\n" +
-                                         "```• hola  : Saludo del Bot " + "\n" +
-                                         "• help  : Informacion del bot" + "\n" +
-                                         "• nota  : Enviar una nota a travez del bot" + "\n"+
-                                         "• clear : Limpiar mensajes del canal" + "\n" +
-                                         "• bienvenida y despedida del usuario al server activados ```" + "\n\n" +
+                await e.User.SendMessage("```css" + "\n" +
+                                         "[LISTA DE COMANDOS]"+"\n\n" +
+                                         " • hola    : Saludo del Bot " + "\n" +
+                                         " • ayuda   : Informacion del bot" + "\n" +
+                                         " • nota    : Enviar una nota a travez del bot" + "\n"+
+                                         " • limpiar : Limpiar mensajes del canal" + "\n" +
+                                         " • avatar  : Muesta el avatar de tu perfil" + "\n" +
+                                         " • info    : Lista informacion del usuario" + "\n" +
+                                         " • bienvenida y despedida del usuario al server activados" + "\n\n" +
+                                         "```"
+                                         + "\n\n" +
                                          //"**Soporte Bot**" + "\n" +
                                          //"Github: github.com/antonventuro/BetaTester-Bot-Discord" + "\n\n" +
                                          "**Social**:" +"\n"+
@@ -127,9 +158,9 @@ namespace BetaTester_bot
             });
         }
 
-        private void comandoclear()
+        private void comandolimpiar()
         {
-            comando.CreateCommand("clear")
+            comando.CreateCommand("limpiar")
             .Parameter("cantidad", ParameterType.Required)
             .Do(async (e) =>
             {
