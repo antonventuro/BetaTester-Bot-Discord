@@ -12,7 +12,7 @@ namespace BetaTester_bot
 {
     class BetaTesterBot
     {
-
+      
         DiscordClient discord;
         CommandService comando;
 
@@ -115,6 +115,7 @@ namespace BetaTester_bot
             });
         }
 
+        
         //private void Comandoping()
         //{
         //    var CServicio = discord.GetService<CommandService>();
@@ -131,7 +132,7 @@ namespace BetaTester_bot
             {
                 var user = e.User;
                
-                await e.Channel.SendMessage(String.Format("Ok, {0} Te enviare un mensaje privado", user.Mention));
+                await e.Channel.SendMessage(String.Format("Ok, {0} te enviaré un mensaje privado.", user.Mention));
 
                 await e.User.SendMessage("```css" + "\n" +
                                          "[LISTA DE COMANDOS]"+"\n\n" +
@@ -189,7 +190,7 @@ namespace BetaTester_bot
                 else
                 {
                     
-                    await e.Channel.SendMessage("No tienes permiso para usar el comando `clear`");
+                    await e.Channel.SendMessage("No tienes permiso para usar el comando `limpiar`");
                    
                 }
 
